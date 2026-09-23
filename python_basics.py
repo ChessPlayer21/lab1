@@ -5,7 +5,15 @@ from grader_contracts.python_basics import PositiveIntegerInput, TextInput, Vect
 
 def count_vowels(data: TextInput) -> int:
     text = data.value
-    raise NotImplementedError  # TODO
+    count_vowels_2 = 0
+    for i in range(text.count - 1):
+        if text[i] == "euioa":
+            count_vowels_2 += 1
+        else:
+            continue
+    return count_vowels_2
+
+        
 
 
 def has_unique_characters(data: TextInput) -> bool:
