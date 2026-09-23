@@ -6,8 +6,8 @@ from grader_contracts.python_basics import PositiveIntegerInput, TextInput, Vect
 def count_vowels(data: TextInput) -> int:
     text = data.value
     count_vowels_2 = 0
-    for i in range(text.count - 1):
-        if text[i] == "euioa":
+    for i in range(len(text)):
+        if text[i] in "euioa":
             count_vowels_2 += 1
         else:
             continue
