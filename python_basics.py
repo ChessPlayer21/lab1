@@ -18,7 +18,13 @@ def count_vowels(data: TextInput) -> int:
 
 def has_unique_characters(data: TextInput) -> bool:
     text = data.value
-    raise NotImplementedError  # TODO
+    array_unique_simbols = []
+    for i in range(len(text)):
+        if text[i] in array_unique_simbols:
+            return False
+        else:
+            array_unique_simbols.append(text[i])
+    return True
 
 
 def count_one_bits(data: PositiveIntegerInput) -> int:
