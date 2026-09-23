@@ -29,7 +29,11 @@ def has_unique_characters(data: TextInput) -> bool:
 
 def count_one_bits(data: PositiveIntegerInput) -> int:
     number = data.value
-    raise NotImplementedError  # TODO
+    count_bits = []
+    while(number > 0):
+        count_bits.append(number % 2)
+        number = number // 2
+    return count_bits.count(1)
 
 
 def multiplicative_persistence(data: PositiveIntegerInput) -> int:
