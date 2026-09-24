@@ -37,9 +37,22 @@ def count_one_bits(data: PositiveIntegerInput) -> int:
 
 
 def multiplicative_persistence(data: PositiveIntegerInput) -> int:
+    counter = 0
     number = data.value
-    raise NotImplementedError  # TODO
+    while(number >= 10):
+        number = new_number(number)
+        counter += 1
+    return counter
 
+def new_number(number):
+    array_number = []
+    string_number = str(number)
+    new_number = 1
+    for i in range(len(string_number)):
+        array_number.append(string_number[i])
+    for i in range(len(array_number)):
+        new_number = new_number * int(array_number[i])
+    return new_number
 
 def mse(data: VectorPairInput) -> float:
     predicted, expected = data.predicted, data.expected
