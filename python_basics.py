@@ -56,8 +56,10 @@ def new_number(number):
 
 def mse(data: VectorPairInput) -> float:
     predicted, expected = data.predicted, data.expected
-    raise NotImplementedError  # TODO
-
+    sum = 0.0
+    for i in range(len(predicted)):
+        sum = sum + (predicted[i] - expected[i])**2
+    return sum / len(predicted)
 
 def prime_factorization(data: PositiveIntegerInput) -> str:
     number = data.value
