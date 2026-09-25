@@ -63,14 +63,52 @@ def mse(data: VectorPairInput) -> float:
 
 def prime_factorization(data: PositiveIntegerInput) -> str:
     number = data.value
-    raise NotImplementedError  # TODO
-
+    number_2 = number
+    count_number = {}
+    while number != 1:
+        for i in range(2, number + 1):          
+            if number % i == 0:
+                if str(i) in count_number:
+                    count_number[str(i)] += 1
+                else:
+                    count_number[str(i)] = 1    
+                number = number // i            
+                break
+            else:
+                continue
+        else:
+            count_number[str(number)] = count_number.get(str(number), 0) + 1
+            break                              
+    itog_string = ""
+    for i in range(1, number_2 + 1):           
+        key = str(i)
+        if key not in count_number:         
+            continue
+        if count_number[key] == 0:
+            continue
+        elif count_number[key] == 1:
+            itog_string += f"({key})"
+        elif count_number[key] > 1:            
+            itog_string += f"({key}**{count_number[key]})"
+    return itog_string
 
 def pyramid(data: PositiveIntegerInput) -> int | str:
     cube_count = data.value
-    raise NotImplementedError  # TODO
+    if cube_count == 0:
+        return 0
+    cube_number = 1
+    while(cube_count > 0):
+        cube_count = cube_count - cube_number**2
+        if cube_count == 0:
+            return cube_number
+        elif cube_count < 0:
+            return "It is impossible"
+        cube_number += 1
+    return cube_number
+
 
 
 def is_balanced_number(data: PositiveIntegerInput) -> bool:
     number = data.value
     raise NotImplementedError  # TODO
+
