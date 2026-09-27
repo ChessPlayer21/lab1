@@ -19,7 +19,14 @@ def sum_prod(data: MatrixVectorBatchInput) -> np.ndarray:
 
 def binarize(data: BinarizeInput) -> np.ndarray:
     matrix, threshold = data.matrix, data.threshold
-    raise NotImplementedError  # TODO
+    new_matrix = matrix.copy()
+    for i in range(len(matrix)):
+        for k in range(len(matrix[0])):
+            if matrix[i, k] > threshold:
+                new_matrix[i, k] = 1
+            else:
+                new_matrix[i, k] = 0
+    return new_matrix
 
 
 def unique_rows(data: MatrixInput) -> list[list[float]]:
