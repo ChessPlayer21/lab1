@@ -31,12 +31,38 @@ def binarize(data: BinarizeInput) -> np.ndarray:
 
 def unique_rows(data: MatrixInput) -> list[list[float]]:
     matrix = data.matrix
-    raise NotImplementedError  # TODO
+    array_unique_simbols = []
+    for i in range(len(matrix)):
+        count_simbols = {}
+        unique_simbols = []
+        for k in range(len(matrix[0])):
+            if matrix[i, k] in count_simbols:
+                count_simbols[matrix[i, k]] += 1
+            else:
+                count_simbols[matrix[i, k]] = 1
+        for key, value in count_simbols.items():
+            if value == 1:
+                unique_simbols.append(key)   
+        array_unique_simbols.append(unique_simbols)
+    return array_unique_simbols
 
 
 def unique_columns(data: MatrixInput) -> list[list[float]]:
     matrix = data.matrix
-    raise NotImplementedError  # TODO
+    array_unique_simbols = []
+    for i in range(len(matrix[0])):       
+        count_simbols = {}
+        unique_simbols = []
+        for k in range(len(matrix)):
+            if matrix[k, i] in count_simbols:   
+                count_simbols[matrix[k, i]] += 1 
+            else:
+                count_simbols[matrix[k, i]] = 1  
+        for key, value in count_simbols.items():
+            if value == 1:
+                unique_simbols.append(key)
+        array_unique_simbols.append(unique_simbols)
+    return array_unique_simbols
 
 
 def matrix_statistics(data: RandomMatrixInput) -> MatrixStatistics:
