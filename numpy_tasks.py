@@ -67,8 +67,19 @@ def unique_columns(data: MatrixInput) -> list[list[float]]:
 
 def matrix_statistics(data: RandomMatrixInput) -> MatrixStatistics:
     rows, columns, mean, std, seed = data.rows, data.columns, data.mean, data.std, data.seed
-    raise NotImplementedError  # TODO
-
+    np.random.seed(seed)
+    matrix = np.random.normal(loc = mean, scale = std, size = (rows, columns))
+    average_x = matrix.mean(axis = 1)
+    average_y = matrix.mean(axis = 0)
+    dispersion_x = matrix.var(axis = 1)
+    dispersion_y = matrix.var(axis = 0)
+    return MatrixStatistics(
+        matrix=matrix,
+        average_x= average_x,
+        average_y = average_y,
+        dispersion_x = dispersion_x,
+        dispersion_y = dispersion_y
+    )
 
 def chess(data: ChessInput) -> np.ndarray:
     rows, columns, first, second = data.rows, data.columns, data.first, data.second
