@@ -86,19 +86,31 @@ def draw_rectangle(data: RectangleInput) -> np.ndarray:
     width, height = data.width, data.height
     image_height, image_width = data.image_height, data.image_width
     shape_color, background_color = data.shape_color, data.background_color
-    raise NotImplementedError  # TODO
+    rgb_image = np.zeros((image_height, image_width, 3), dtype=np.uint8)
+    rgb_image[:] = background_color
+    rgb_image[(image_height - height) // 2:(image_height - height) // 2 + height, (image_width - width) // 2:(image_width - width) // 2 + width] = shape_color
+    return rgb_image
 
 
 def draw_ellipse(data: EllipseInput) -> np.ndarray:
     semi_axis_x, semi_axis_y = data.semi_axis_x, data.semi_axis_y
     image_height, image_width = data.image_height, data.image_width
     shape_color, background_color = data.shape_color, data.background_color
-    raise NotImplementedError  # TODO
+    center_x = image_width / 2
+    center_y = image_height / 2 
+    rgb_image = np.zeros((image_height, image_width, 3), dtype=np.uint8)
+    rgb_image[:] = background_color
+    Y, X = np.indices((image_height, image_width))
+    figure = (X - center_x)**2 / semi_axis_x**2 + (Y - center_y)**2 / semi_axis_y**2
+    mask = figure <= 1
+    rgb_image[mask] = shape_color
+    return rgb_image
+
 
 
 def analyze_time_series(data: TimeSeriesInput) -> TimeSeriesStatistics:
     values, window = data.values, data.window
-    raise NotImplementedError  # TODO
+    
 
 
 def one_hot(data: OneHotInput) -> np.ndarray:
