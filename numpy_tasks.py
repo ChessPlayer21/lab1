@@ -110,9 +110,34 @@ def draw_ellipse(data: EllipseInput) -> np.ndarray:
 
 def analyze_time_series(data: TimeSeriesInput) -> TimeSeriesStatistics:
     values, window = data.values, data.window
-    
+    values = np.asarray(values, dtype=float)
+    average = values.mean()
+    dispersion = values.var()
+    deviation = values.std()
+    local_max = []
+    local_min = []
+    for i in range(0, len(values) - 2):
+        if values[i] < values[i + 1] and values[i + 1] > values[i + 2]:
+            local_max.append(i + 1)
+        if values[i] > values[i + 1] and values[i + 1] < values[i + 2]:
+            local_min.append(i + 1)
+    kernel = np.ones(window) / window
+    moving = np.convolve(values, kernel, mode="valid")
+    return TimeSeriesStatistics(
+    average=average,
+    dispersion=dispersion,
+    deviation=deviation,
+    local_max=local_max,
+    local_min=local_min,
+    moving_average=moving,
+)
 
 
 def one_hot(data: OneHotInput) -> np.ndarray:
     labels, class_count = data.labels, data.class_count
-    raise NotImplementedError  # TODO
+    if class_count is None:
+        class_count = labels.max() + 1
+    matrix = np.zeros((len(labels), class_count))
+    for i in range(len(labels)):
+        matrix[i, labels[i]] = 1
+    return matrix
